@@ -1,0 +1,26 @@
+## Establish Connection to MISP INSTANCE
+
+from pymisp import ExpandedPyMISP
+from pprint import pprint
+from key import misp_url, misp_key, misp_verifycert
+
+misp = ExpandedPyMISP(misp_url, misp_key, False)
+
+def print_result(result):
+    flag_printed = False
+    if isinstance(result, list):
+        print("Count: %s" % len(result))
+        flag_printed = True
+        for i in res:
+            if 'Event' in i and 'Attribute' in i['Event']:
+                print("  - Attribute count: %s" % len(i['Event']['Attribute']))
+    elif isinstance(result, dict):
+        if 'Attribute' in result:
+            print("Count: %s" % len(result['Attribute']))
+            flag_printed = True
+        elif 'Event' in result and 'Attribute' in result['Event']['Attribute']:
+            print("Attribute count: %s" % len(result['Event']['Attribute']))
+            flag_printed = True
+    if flag_printed:
+        print('----------')
+    pprint(result)
