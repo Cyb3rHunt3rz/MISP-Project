@@ -1,0 +1,20 @@
+# BACKUP
+endpoint = '/events/edit/'
+relative_path = '22'
+
+body = {
+
+     #"distribution": 4,
+     #"sharing_group_id": 6,
+
+     "Tag": [
+     {
+      #"id": "6",
+      "name": "tlp:amber"
+     }
+     ]
+
+}  
+
+res = misp.direct_call(endpoint + relative_path, body)  
+print_result(res)
