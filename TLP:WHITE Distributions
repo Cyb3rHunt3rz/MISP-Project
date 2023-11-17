@@ -1,0 +1,35 @@
+## Changing MISP EVENT with tlp:white tagging for Sharing Group TlP:WHITE
+import json
+
+# Search for events with tlp:white tag
+search_endpoint = '/events/index/search'
+search_body = {
+    "tag": "tlp:white"
+}
+
+search_res = misp.direct_call(search_endpoint, search_body)
+search_results = search_res or []  # Handle None response
+
+if search_results:
+    # Update distribution for the found events
+    output_data = []
+    for event in search_results:
+        event_id = event.get('id')
+        update_endpoint = f'/events/edit/{event_id}'
+        
+        update_body = {
+            "distribution": 4,  # Distribution value
+            "sharing_group_id": 6  # Sharing Group ID
+        }
+
+        update_res = misp.direct_call(update_endpoint, update_body)
+        output_data.append({
+            "event_id": event_id,
+            "update_result": update_res
+        })
+
+    # Print the output in JSON format
+    print(json.dumps(output_data, indent=2))
+
+else:
+    print("No events found with the specified tag.")
