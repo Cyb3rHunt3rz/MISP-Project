@@ -1,0 +1,14 @@
+# Event Creation 
+
+endpoint = '/events/add'
+relative_path = ''
+
+body = {
+    "info": "Event created via the API as an example",
+    "threat_level_id": 1,
+    "distribution": 0,
+    #"sharing_group_id": 6
+}
+
+res = misp.direct_call(endpoint + relative_path, body)
+print_result(res)
