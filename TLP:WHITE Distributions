@@ -1,4 +1,4 @@
-## Changing MISP EVENT with tlp:white tagging for Sharing Group TLP:WHITE
+## Changing MISP EVENT with tlp:white tagging for Sharing Group With TLP:WHITE
 import json
 
 # Search for events with tlp:white tag
